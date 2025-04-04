@@ -7,7 +7,7 @@ This repository contains a custom implementation of a Restricted Boltzmann Machi
 - Conditional momentum adjustment based on epoch count for enhanced learning performance.
 - Configurable learning rate, batch size, and training epochs.
 - Command-line interface (CLI) with `typer` for easy configuration.
-- Modular and well-documented codebase for ease of maintenance.
+
 
 ## Installation
 

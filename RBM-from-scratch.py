@@ -139,10 +139,7 @@ class RBM:
         return pv1
 
 
-def main(file_path: str = '/home/mahdis/coded_6lat_T=3.5_600k.npy', epochs: int = 15000, lr: float = 0.0001, batch_size: int = 50, momentum: float = 0.9):
-    """
-    Main training loop for the RBM.
-    """
+def main(file_path: str = '/home/mahdis/coded_6lat_T=3.5_600k.npy', epochs: int = 15000, lr: float = 0.0001, batch_size: int = 50):
     X_train = np.load(file_path)
     rbm = RBM(n_vis=36, n_hid=36)
 
@@ -153,7 +150,12 @@ def main(file_path: str = '/home/mahdis/coded_6lat_T=3.5_600k.npy', epochs: int 
         epoch_error = 0
         for batch in get_batches(X_train, batch_size):
             epoch_error += rbm.compute_error_and_grads(batch)
-            rbm.update_params(lr, momentum)
+
+            if epoch > 1500:
+                rbm.update_params(lr, momentum=0.3)
+            else:
+                rbm.update_params(lr, momentum=0.9)
+
         errors.append(epoch_error)
         print(f"Epoch {epoch} Error: {epoch_error:.4f} Time: {time() - start_time:.2f} s")
 
